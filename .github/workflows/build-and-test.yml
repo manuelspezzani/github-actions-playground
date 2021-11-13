@@ -23,6 +23,6 @@ jobs:
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
-          name: dotnet-results-${{ matrix.dotnet-version }}
-          path: TestResults-${{ matrix.dotnet-version }}
+          name: dotnet-results
+          path: TestResults
         if: ${{ always() }}
