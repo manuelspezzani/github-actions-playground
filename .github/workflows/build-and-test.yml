@@ -1,23 +1,25 @@
-name: build-for-raspberry
+name: build-and-test
 on: [push]
 jobs:
   compile-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.0'
+          dotnet-version: 6.0.x
 
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore src/TestConsole.sln
 
       - name: Build
         run: dotnet build src/TestConsole.sln --configuration Release 
 
       - name: Test
         run: dotnet test src/TestConsole.sln --logger trx --results-directory "TestResults"
-        
+
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v2
         with:
