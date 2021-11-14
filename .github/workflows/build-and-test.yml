@@ -1,12 +1,10 @@
 name: build-and-test 
 on: [push]
 env: 
-    version: '1.2.3.4'
+    version: 1.2.3.4
 jobs:
   compile-and-test:
     runs-on: ubuntu-latest
-    env:
-        RELEASE_VERSION: ${{ '1.2.3.4' }}
     steps:
       - uses: actions/checkout@v2
 
