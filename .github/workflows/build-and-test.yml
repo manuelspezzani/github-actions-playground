@@ -17,7 +17,7 @@ jobs:
         run: dotnet restore src/TestConsole.sln
 
       - name: Build
-        run: dotnet build src/TestConsole.sln --configuration Release /p:Version="${{ fromJSON(env.version) }}"
+        run: dotnet build src/TestConsole.sln --configuration Release /p:Version="${{env.version}}"
 
       - name: Test
         run: dotnet test src/TestConsole.sln --logger trx --results-directory test-results
