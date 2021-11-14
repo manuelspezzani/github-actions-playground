@@ -35,3 +35,10 @@ jobs:
         with:
           name: build-output
           path: src/TestConsole/bin/Release/net6.0/**
+          
+      - name: Create/Update the tag
+        uses: julb/action-manage-tag@v1
+        with:
+          name: release-${{env.version}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
