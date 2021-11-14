@@ -1,8 +1,12 @@
 name: build-and-test 
 on: [push]
+env: 
+    version: '1.2.3.4'
 jobs:
   compile-and-test:
     runs-on: ubuntu-latest
+    env:
+        RELEASE_VERSION: ${{ '1.2.3.4' }}
     steps:
       - uses: actions/checkout@v2
 
@@ -15,7 +19,7 @@ jobs:
         run: dotnet restore src/TestConsole.sln
 
       - name: Build
-        run: dotnet build src/TestConsole.sln --configuration Release 
+        run: dotnet build src/TestConsole.sln --configuration Release /p:Version="${{ fromJSON(env.version) }}"
 
       - name: Test
         run: dotnet test src/TestConsole.sln --logger trx --results-directory test-results
